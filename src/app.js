@@ -4,13 +4,16 @@ const defaultState = {items: []};
 const testApp = (currentState, action) => {
     if (currentStateIsBogus())
         return defaultState;
-    
+
     if (actionIsBogus())
         return currentState;
 
     const newState = {
         items: []
     };
+
+    if (currentState.items && currentState.items.length)
+        newState.items = currentState.items.map(item => item);
 
     if (action.type === 'ADD_ITEM') {
         if (action.text)
@@ -24,7 +27,7 @@ const testApp = (currentState, action) => {
     }
 
     function actionIsBogus() {
-        return hasBadType(action);
+        return hasBadType(action) || !action.type || !action.text;
     }
 };
 
