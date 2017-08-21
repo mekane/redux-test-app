@@ -1,9 +1,10 @@
+'use strict';
 const defaultState = {items: []};
 
 const testApp = (currentState, action) => {
     if (currentStateIsBogus())
         return defaultState;
-
+    
     if (actionIsBogus())
         return currentState;
 
@@ -11,8 +12,9 @@ const testApp = (currentState, action) => {
         items: []
     };
 
-    if ( action.type === 'ADD_ITEM' ){
-        newState.items.push(action.text);
+    if (action.type === 'ADD_ITEM') {
+        if (action.text)
+            newState.items.push(action.text);
     }
 
     return newState;

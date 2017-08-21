@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const deepFreeze = require('deep-freeze');
 const testApp = require('../src/app.js');
 
 describe('The Test App root reducer', () => {
@@ -34,6 +35,20 @@ describe('The Test App root reducer', () => {
             expect(actualState).to.deep.equal(expectedState);
         });
 
+        it('should ignore the action if the item text is missing', () => {
+            const addItemAction = {
+                type: 'ADD_ITEM'
+            };
+
+            const expectedState = {
+                items: []
+            };
+
+            const actualState = testApp({}, addItemAction);
+
+            expect(actualState).to.deep.equal(expectedState);
+        });
+
         it('should add items to the list if called with the ADD_ITEM action type', () => {
             const addItemAction = {
                 type: 'ADD_ITEM',
@@ -44,9 +59,24 @@ describe('The Test App root reducer', () => {
                 items: ['test']
             };
 
-            const actualState = testApp(null, addItemAction);
+            const actualState = testApp({}, addItemAction);
 
             expect(actualState).to.deep.equal(expectedState);
+        });
+
+        it('should never modify the previous state, only return new ones', () => {
+            const addItemAction = {
+                type: 'ADD_ITEM',
+                text: 'test'
+            };
+
+            const originalState = {
+                items: ['do not modify']
+            };
+
+            deepFreeze(originalState); //will throw an exception if anyone tries to mutate originalState
+
+            testApp(originalState, addItemAction);
         });
     });
 
