@@ -2,20 +2,12 @@
 <html>
 <head>
     <title>Redux Test App</title>
-    <script src="node_modules/redux/dist/redux.js"></script>
 </head>
 <body>
 
-    <button onclick="store.dispatch({type: 'ADD_ITEM', text: 'TEST'}); console.log(store.getState());">Add Test Item</button>
-    <button onclick="store.dispatch({type: 'ADD_ITEM', text: 'ECLIPSE'}); console.log(store.getState());">Add Eclipse Item</button>
+    <button onclick="app.store.dispatch(app.actions.addItem('TEST')); console.log(app.store.getState());">Add Test Item</button>
+    <button onclick="app.store.dispatch(app.actions.addItem('ECLIPSE')); console.log(app.store.getState());">Add Eclipse Item</button>
 
-    <script>
-        module = {};
-    </script>
-    <script src="src/app.js"></script>
-    <script>
-        //super hacky workaround to avoid setting up browserify at just this moment
-        const store = Redux.createStore(module.exports);
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
