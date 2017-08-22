@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const deepFreeze = require('deep-freeze');
-const testApp = require('../src/app.js');
+const testApp = require('../src/reducer.js');
 
 const actions = require('../src/actions.js');
 const testAddItemAction = actions.addItem('test');
