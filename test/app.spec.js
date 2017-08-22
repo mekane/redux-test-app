@@ -134,5 +134,32 @@ describe('The Test App root reducer', () => {
 
             expect(actualState).to.deep.equal(expectedState);
         });
+
+        it('should be able to continue from a known last ID, regardless of what items are in the list', () => {
+            const addItemAction = {
+                type: 'ADD_ITEM',
+                text: 'test'
+            };
+
+            const originalState = {
+                items: [],
+                itemsById: {},
+                lastItemId: 3
+            };
+
+            const expectedState = {
+                items: [4, 5],
+                itemsById: {
+                    4: {id: 4, text: 'test'},
+                    5: {id: 5, text: 'test'}
+                },
+                lastItemId: 5
+            };
+
+            const nextState = testApp(originalState, addItemAction);
+            const actualState = testApp(nextState, addItemAction);
+
+            expect(actualState).to.deep.equal(expectedState);
+        });
     });
 });
