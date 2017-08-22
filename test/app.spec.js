@@ -2,6 +2,9 @@ const expect = require('chai').expect;
 const deepFreeze = require('deep-freeze');
 const testApp = require('../src/app.js');
 
+const actions = require('../src/actions.js');
+const testAddItemAction = actions.addItem('test');
+
 describe('The Test App root reducer', () => {
     const defaultState = {
         items: [],
@@ -52,11 +55,6 @@ describe('The Test App root reducer', () => {
         });
 
         it('should add items to the list by ID if called with the ADD_ITEM action type', () => {
-            const addItemAction = {
-                type: 'ADD_ITEM',
-                text: 'test'
-            };
-
             const expectedState = {
                 items: [1],
                 itemsById: {
@@ -65,17 +63,12 @@ describe('The Test App root reducer', () => {
                 lastItemId: 1
             };
 
-            const actualState = testApp({}, addItemAction);
+            const actualState = testApp({}, testAddItemAction);
 
             expect(actualState).to.deep.equal(expectedState);
         });
 
         it('should continue to add more items to the list with subsequent actions', () => {
-            const addItemAction = {
-                type: 'ADD_ITEM',
-                text: 'test'
-            };
-
             const expectedState = {
                 items: [1, 2, 3],
                 lastItemId: 3,
@@ -86,26 +79,21 @@ describe('The Test App root reducer', () => {
                 }
             };
 
-            const firstState = testApp(defaultState, addItemAction);
-            const secondState = testApp(firstState, addItemAction);
-            const actualState = testApp(secondState, addItemAction);
+            const firstState = testApp(defaultState, testAddItemAction);
+            const secondState = testApp(firstState, testAddItemAction);
+            const actualState = testApp(secondState, testAddItemAction);
 
             expect(actualState).to.deep.equal(expectedState);
         });
 
         it('should never modify the previous state, only return new ones', () => {
-            const addItemAction = {
-                type: 'ADD_ITEM',
-                text: 'test'
-            };
-
             const originalState = {
                 items: ['do not modify']
             };
 
             deepFreeze(originalState); //will throw an exception if anyone tries to mutate originalState
 
-            testApp(originalState, addItemAction);
+            testApp(originalState, testAddItemAction);
         });
     });
 
@@ -115,11 +103,6 @@ describe('The Test App root reducer', () => {
         });
 
         it('should increment the IDs of subsequent items that are added', () => {
-            const addItemAction = {
-                type: 'ADD_ITEM',
-                text: 'test'
-            };
-
             const expectedState = {
                 items: [1, 2],
                 itemsById: {
@@ -129,18 +112,13 @@ describe('The Test App root reducer', () => {
                 lastItemId: 2
             };
 
-            const nextState = testApp(defaultState, addItemAction);
-            const actualState = testApp(nextState, addItemAction);
+            const nextState = testApp(defaultState, testAddItemAction);
+            const actualState = testApp(nextState, testAddItemAction);
 
             expect(actualState).to.deep.equal(expectedState);
         });
 
         it('should be able to continue from a known last ID, regardless of what items are in the list', () => {
-            const addItemAction = {
-                type: 'ADD_ITEM',
-                text: 'test'
-            };
-
             const originalState = {
                 items: [],
                 itemsById: {},
@@ -156,8 +134,8 @@ describe('The Test App root reducer', () => {
                 lastItemId: 5
             };
 
-            const nextState = testApp(originalState, addItemAction);
-            const actualState = testApp(nextState, addItemAction);
+            const nextState = testApp(originalState, testAddItemAction);
+            const actualState = testApp(nextState, testAddItemAction);
 
             expect(actualState).to.deep.equal(expectedState);
         });
