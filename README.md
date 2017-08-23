@@ -10,9 +10,18 @@ I used TDD to build the reducer, to make sure my state transitions are sensible.
 
 ## Getting Started
 
-At the moment all it needs is an `npm install`. There is no build tool set up yet, and the index.html uses an extrememly hacky workaround, which I did to avoid spending time setting up browserify for the 400th time. (I do intend to do that at some point though).
+At the moment all it needs is an `npm install`. 
+
+The project uses Grunt as the build tool, so you may want to install it globally (`npm install -g Grunt`), otherwise you can run it out of the npm directory (`./node_modules/.bin/grunt <task>`)
+
+See `grunt -h` for available tasks. The important ones are:
+
+   * `grunt test` - runs the unit tests, telling mocha to pipe the source through Babel.
+   * `grunt build` - transpiles source, builds stylus, and puts all output in *build/*
+   * `grunt server` - starts a development web server using *build/* as its web root, and keeps a watcher running that re-runs build if any of the source files change. 
 
 ## Next Steps
 
-Having read about the normalizr library, I want to modify the ADD_ITEM action to assign an id, add the id to the items array, and also maintain an 'itemsById' map.
+   * Build some generic React components to show the list of items and allow add, delete, and edit. I plan to wire this up by hand, but using the Redux store, but still attempting to architect it with container and presentational components.
+   * Replace hand-coded container components and redux subscribing with components generated using `react-redux` `connect()`. See http://redux.js.org/docs/basics/UsageWithReact.html#implementing-container-components
 
