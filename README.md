@@ -8,6 +8,8 @@ This is a useful exercise to me because I watched the Redux videos and wrote a f
 
 I used TDD to build the reducer, to make sure my state transitions are sensible. I consider that to be the foundation of good practice. I am also curious to see how I naturally break apart reducers and actions as an app grows, and compare that to other examples.
 
+I also then plan to use this as a boilerplate for other apps, since it will have the app structure and task runner all set up.
+
 ## Getting Started
 
 At the moment all it needs is an `npm install`. 
@@ -16,12 +18,12 @@ The project uses Grunt as the build tool, so you may want to install it globally
 
 See `grunt -h` for available tasks. The important ones are:
 
-   * `grunt test` - runs the unit tests, telling mocha to pipe the source through Babel.
+   * `grunt test` - runs the unit tests, telling mocha to pipe the source through Babel. This is necessary once any source or test code has ES6 features that Node doesn't support.
    * `grunt build` - transpiles source, builds stylus, and puts all output in *build/*
    * `grunt server` - starts a development web server using *build/* as its web root, and keeps a watcher running that re-runs build if any of the source files change. 
 
 ## Next Steps
 
-   * Build some generic React components to show the list of items and allow add, delete, and edit. I plan to wire this up by hand, but using the Redux store, but still attempting to architect it with container and presentational components.
+   * Add edit, save, and delete actions to the system. Use TDD and then think about how to break down the reducer. Maybe figure out how to structure it for use with combineReducers()  
    * Replace hand-coded container components and redux subscribing with components generated using `react-redux` `connect()`. See http://redux.js.org/docs/basics/UsageWithReact.html#implementing-container-components
-
+   * React routing and multiple screens?
