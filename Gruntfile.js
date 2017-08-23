@@ -91,20 +91,20 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('build', [
+    grunt.registerTask('build', 'Transpile JavaScript source code, build CSS out of stylus and prepare to serve', [
         'clean:build',
         'copy:index',
         'browserify:build',
         'stylus:build'
     ]);
 
-    grunt.registerTask('serve', [
+    grunt.registerTask('serve', 'Build the app, start development web server, and watch for changes', [
         'build',
         'connect:demo',
         'watch'
     ]);
 
-    grunt.registerTask('test', [
+    grunt.registerTask('test', 'Run the unit tests with mocha, piped through Babel', [
         'mochaTest'
     ]);
 };
