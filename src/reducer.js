@@ -7,11 +7,8 @@ const defaultState = () => {
     };
 };
 
-const testApp = (currentState, action) => {
-    if (currentStateIsBogus())
-        return defaultState();
-
-    if (actionIsBogus())
+const testApp = (currentState = defaultState(), action) => {
+    if (currentStateIsBogus() || actionIsBogus())
         return currentState;
 
     const newState = copyState(currentState);
