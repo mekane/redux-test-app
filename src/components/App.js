@@ -2,9 +2,9 @@ const React = require('react'); //because the JSX transpiles to React.createElem
 const Controls = require('./Controls');
 const ItemList = require('./ItemList');
 
-const App = (props) => (
+const App = ({state}) => (
     <div className="app">
-        <ItemList itemsToList={props.state.items} itemsById={props.state.itemsById}></ItemList>
+        <ItemList itemsToList={state.items} itemsById={state.itemsById}></ItemList>
         <Controls></Controls>
     </div>
 );
