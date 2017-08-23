@@ -2,10 +2,10 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Redux = require('redux');
 
-const actions = require('./src/actions.js');
-const reducer = require('./src/reducer.js');
+const actions = require('../actions.js');
+const reducer = require('../reducer.js');
 
-const App = require('./src/components/App');
+const App = require('../components/App');
 
 const store = Redux.createStore(reducer);
 

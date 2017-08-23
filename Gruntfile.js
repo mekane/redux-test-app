@@ -16,7 +16,7 @@ module.exports = function (grunt) {
                         debug: true
                     }
                 },
-                src: ['app.js'],
+                src: ['src/app/app.js'],
                 dest: `${buildDir}/app.js`
             }
         },
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
             index: {
                 files: [
                     {
-                        src: 'index.html',
+                        src: 'src/app/index.html',
                         dest: buildDir,
                         expand: true,
                         flatten: true,
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
                     compress: false
                 },
                 files: [{
-                    src: ['app.styl'],
+                    src: ['src/app/app.styl'],
                     dest: `${buildDir}/app.css`
                 }]
             }
